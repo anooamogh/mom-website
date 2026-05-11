@@ -1,6 +1,5 @@
 const paintings = [
   "paintings/starry-night.jpg",
-  "paintings/wheatfield-with-crows.jpg",
   "paintings/olive-trees.jpg",
   "paintings/cafe-terrace-at-night.jpg",
   "paintings/the-harvest.jpg"
