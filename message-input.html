@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Send a Message to Mom</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .back-link {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      color: white;
+      text-decoration: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .back-link:hover {
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body>
+  <a href="/" class="back-link">← Back</a>
+  <div class="overlay">
+    <div class="content">
+      <h1>Send a Message to Mom 💌</h1>
+      <form id="messageForm">
+        <textarea 
+          id="messageInput" 
+          placeholder="Type your message here..." 
+          maxlength="500"
+          required
+        ></textarea>
+        <button type="submit" class="btn btn-primary">Send Message</button>
+      </form>
+      <p id="status" class="status-message"></p>
+    </div>
+  </div>
+
+  <script>
+    const paintings = [
+      "paintings/starry-night.jpg",
+      "paintings/olive-trees.jpg",
+      "paintings/cafe-terrace-at-night.jpg",
+      "paintings/the-harvest.jpg"
+    ];
+
+    const dayIndex = Math.floor(Date.now() / 86400000) % paintings.length;
+    document.body.style.backgroundImage = `url('${paintings[dayIndex]}')`;
+
+    document.getElementById('messageForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const message = document.getElementById('messageInput').value.trim();
+      const statusElement = document.getElementById('status');
+      const submitBtn = document.querySelector('.btn-primary');
+      
+      if (!message) {
+        statusElement.textContent = 'Please enter a message';
+        statusElement.className = 'status-message error';
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
+
+      try {
+        const response = await fetch('/api/submit-message', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ message })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          statusElement.textContent = '✓ Message sent successfully!';
+          statusElement.className = 'status-message success';
+          document.getElementById('messageInput').value = '';
+          setTimeout(() => {
+            window.location.href = '/';
+          }, 1500);
+        } else {
+          statusElement.textContent = 'Error: ' + (data.error || 'Failed to send message');
+          statusElement.className = 'status-message error';
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Send Message';
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        statusElement.textContent = 'Error: Could not send message. Make sure the server is running.';
+        statusElement.className = 'status-message error';
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send Message';
+      }
+    });
+  </script>
+</body>
+</html>

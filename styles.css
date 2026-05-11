@@ -43,3 +43,120 @@ p {
   font-size: 1.5rem;
   line-height: 1.6;
 }
+
+.heart-btn {
+  background: none;
+  border: none;
+  font-size: 2.5rem;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 10px;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  vertical-align: middle;
+}
+
+.heart-btn:hover {
+  transform: scale(1.15);
+  filter: brightness(1.2);
+}
+
+.heart-btn:active {
+  transform: scale(0.95);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+textarea {
+  padding: 15px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  min-height: 150px;
+  resize: vertical;
+  max-width: 100%;
+}
+
+textarea::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+textarea:focus {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.form-controls {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.btn {
+  padding: 12px 24px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  font-weight: 600;
+}
+
+.btn-primary {
+  background: rgba(200, 100, 150, 0.9);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: rgba(200, 100, 150, 1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  background: rgba(100, 150, 200, 0.9);
+  color: white;
+}
+
+.btn-secondary:hover {
+  background: rgba(100, 150, 200, 1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.btn-secondary:active {
+  transform: translateY(0);
+}
+
+.status-message {
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 4px;
+  text-align: center;
+  font-weight: 600;
+  min-height: 20px;
+}
+
+.status-message.success {
+  color: #90EE90;
+  background: rgba(144, 238, 144, 0.1);
+}
+
+.status-message.error {
+  color: #FF6B6B;
+  background: rgba(255, 107, 107, 0.1);
+}
