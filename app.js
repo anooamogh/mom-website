@@ -30,5 +30,5 @@ fetch("message.json")
 
 // Make the heart button clickable to navigate to message input page
 document.getElementById("heartBtn").addEventListener("click", () => {
-  window.location.href = "/message-input";
+  window.location.href = "message-input.html";
 });
